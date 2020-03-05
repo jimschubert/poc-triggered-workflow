@@ -18,5 +18,5 @@ jobs:
         token: ${{ secrets.REPO_TOKEN }}
         repository: jimschubert/poc-triggered-workflow-orchestrator
         event-type: ${{ secrets.EVENT_NAME }}
-        client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}", "content": "${CONTENT}"}'
+        client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}", "content": "${{env.CONTENT}}"}'
 
