@@ -10,11 +10,13 @@ jobs:
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
+    - name: Set env
+      run:  echo ::set-env name=CONTENT::$(cat ${GITHUB_WORKSPACE}/value.txt)
     - name: Repository Dispatch
       uses: peter-evans/repository-dispatch@v1.0.0
       with:
         token: ${{ secrets.REPO_TOKEN }}
         repository: jimschubert/poc-triggered-workflow-orchestrator
         event-type: ${{ secrets.EVENT_NAME }}
-        client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}", "content": "$(cat ${GITHUB_WORKSPACE}/value.txt)"}'
+        client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}", "content": "${CONTENT}"}'
 
